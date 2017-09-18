@@ -1,6 +1,6 @@
 package com.euap.common.template;
 
-import com.euap.common.runtime.RequestThreadLocal;
+import com.euap.common.web.RequestThreadLocal;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.CharArrayWriter;

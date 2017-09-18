@@ -1,4 +1,4 @@
-package com.euap.common.runtime;
+package com.euap.common.web;
 
 import javax.servlet.http.HttpServletRequest;
 
