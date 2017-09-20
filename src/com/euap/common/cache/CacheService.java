@@ -83,10 +83,11 @@ public class CacheService {
 
 
 
-    public void evict(String cacheKey, String hashKey) {
+    public void evict(String cacheKey, String... hashKey) {
         HashOperations hashOperators = stringRedisTemplate.opsForHash();
         hashOperators.delete(cacheKey, hashKey);
     }
+
 
 
     public void clear(String cacheKey) {
