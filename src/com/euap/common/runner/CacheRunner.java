@@ -33,11 +33,14 @@ public class CacheRunner implements CommandLineRunner{
             Object bean= AopTargetUtils.getTarget(object);
             String name=((Cache)bean.getClass().getAnnotation(Cache.class)).name();
             logger.info("发现缓存：["+name+"]   位置："+bean.getClass().getName());
+            long start=0;
           for(Method method: bean.getClass().getDeclaredMethods()){
               if(method.isAnnotationPresent(RefreshCache.class)){
                  String desc=((RefreshCache)method.getAnnotation(RefreshCache.class)).desc();
                   logger.info("开始："+desc);
+                  start=System.currentTimeMillis();
                   method.invoke(bean,null);
+                  logger.info(desc+"结束,耗时："+(System.currentTimeMillis()-start)+"毫秒");
               }
 
           }
