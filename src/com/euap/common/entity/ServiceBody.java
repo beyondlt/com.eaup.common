@@ -1,6 +1,8 @@
 package com.euap.common.entity;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 
@@ -11,6 +13,8 @@ import java.util.Map;
  * @author         刘涛
  */
 public class ServiceBody implements Serializable {
+
+
 
     public final static String  LINE_BREAKS="<br>";
 
@@ -47,12 +51,13 @@ public class ServiceBody implements Serializable {
 
     /**
      * Method description
-     * @param errorMessage
+     * @param e
      */
-    public void setException(String errorMessage) {
+    public void setException(Class declareClass,Exception e) {
         this.success = false;
-
-        this.message="操作失败！原因：" +errorMessage.replace("\r\n", "<br>");
+        Logger logger=LogManager.getLogger(declareClass);
+        logger.error(ExceptionUtils.getFullStackTrace(e));
+        this.message=ExceptionUtils.getRootCauseMessage(e);
 
     }
 

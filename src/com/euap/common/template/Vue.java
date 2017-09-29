@@ -1,5 +1,6 @@
 package com.euap.common.template;
 
+import com.euap.common.utils.JacksonUtil;
 import com.euap.common.web.RequestThreadLocal;
 import org.apache.commons.lang.StringUtils;
 
@@ -23,8 +24,12 @@ public class Vue {
 
     private String[] css;
 
+    private Class[] entriyClass;
+
 
     private Vue(){};
+
+
 
     public Vue(String template){
         this.template=template;
@@ -32,6 +37,7 @@ public class Vue {
 
     public Vue registerlibrary(String[] lib){
         this.lib=lib;
+
         return this;
     }
     public Vue registerStyle(String[] css){
@@ -45,6 +51,11 @@ public class Vue {
 
     public Vue registerPageScript(String[] pageScript){
         this.pageScript=pageScript;
+        return this;
+    }
+
+    public Vue registerEntity(Class[] entityClass){
+        this.entriyClass=entityClass;
         return this;
     }
 
@@ -93,7 +104,14 @@ public class Vue {
 
             }
             pageScriptWrite.flush();
-            model.put("pageScript",pageScriptWrite.toString());
+           StringBuilder entityBuilder=new StringBuilder();
+            for(Class t:entriyClass){
+                Object o=t.newInstance();
+                entityBuilder.append("var ".concat(t.getSimpleName()).concat("=").concat(JacksonUtil.getObjectMapper().writeValueAsString(o)));
+                entityBuilder.append("\r\n\t");
+            }
+
+            model.put("pageScript",entityBuilder.toString().concat(pageScriptWrite.toString()));
             htmlWrite = new CharArrayWriter();
             Httl.getTemplate("vue.html").render(model, htmlWrite);
             htmlWrite.flush();

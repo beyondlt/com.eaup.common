@@ -71,6 +71,8 @@ public class PinYinUtil {
     public static void main(String[] args) {
         System.out.println(getPingYin("河北省高碑qq店"));
         System.out.println(getPinYinHeadChar("河北省高碑店"));
+        System.out.println("河北省高碑店");
+        System.out.print(System.getProperty("file.encoding"));
       //  System.out.println(getCnASCII(""));
     }
 }

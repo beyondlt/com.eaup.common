@@ -1,15 +1,12 @@
-package com.euap.common.runner;
+package com.euap.common.cache;
 
 import com.euap.common.aop.AopTargetUtils;
-import com.euap.common.cache.Cache;
-import com.euap.common.cache.RefreshCache;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.Order;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;

@@ -12,16 +12,17 @@ public class RequestThreadLocal {
     public static void set(HttpServletRequest request){
         requestThreadLocal.set(request);
     }
+
     public static HttpServletRequest get(){
         return requestThreadLocal.get();
     }
 
     public static String getWebappUrl(){
-        return "http://localhost:8085/euap";
+        return "http://localhost:8080/euap";
     }
 
     public static String getWsappUrl(){
-        return "ws://localhost:8085/euap";
+        return "ws://localhost:8080/euap";
     }
 
 }
